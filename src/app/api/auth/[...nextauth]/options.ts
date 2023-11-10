@@ -24,6 +24,7 @@ export const options: NextAuthOptions = {
       },
       async authorize(credentials) {
         //Getting data from database
+
         const user = { id: "42", name: "Dave", password: "nextauth" };
 
         if (
@@ -37,4 +38,22 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
+  callbacks: {
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if (user) {
+        console.log("user", user);
+        token.image = "https://avatars.githubusercontent.com/u/107813515?v=4";
+        console.log("tokennn", token);
+      }
+
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.image = token.image as string;
+      }
+
+      return session;
+    },
+  },
 };

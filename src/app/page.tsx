@@ -7,10 +7,6 @@ export default async function Home() {
   const session = await getServerSession(options);
   console.log(session?.user);
   console.log("session", session);
-  const {
-    user: { name },
-  } = session;
-  return (
-    <main>{session ? <h1>ok , {name}</h1> : <h1>You shall not pass</h1>}</main>
-  );
+
+  return <main>{session ? <h1>ok </h1> : <h1>You shall not pass</h1>}</main>;
 }
